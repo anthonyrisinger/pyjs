@@ -15,6 +15,7 @@ else:
 translate_cmd = 'translator.py'
 translate_cmd_opts = ['--use-translator=%s' % translator.name]
 
+from pyjs import models
 
 if pyjs.pyjspth is None:
     PYLIB_PATH = os.path.join(os.path.dirname(__file__), 'lib')
@@ -222,6 +223,9 @@ class BaseLinker(object):
                  compile_inplace=False,
                  list_imports=False,
                  translator_func=out_translate):
+        print modules
+        self._link_manager = models.LinkManager(modules)
+        print self._link_manager
         modules = [mod.replace(os.sep, '.') for mod in modules]
         self.compiler = compiler
         self.js_path = os.path.abspath(output)
