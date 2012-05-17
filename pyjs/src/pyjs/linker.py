@@ -216,17 +216,14 @@ class BaseLinker(object):
     def __init__(self, modules, output='output',
                  compiler=None,
                  debug=False,
-                 js_libs=[], static_js_libs=[], early_static_js_libs=[], late_static_js_libs=[], dynamic_js_libs=[],
-                 early_static_app_libs = [], unlinked_modules = [], keep_lib_files = False,
+                 keep_lib_files = False,
                  platforms=[], path=[],
                  translator_arguments={},
                  compile_inplace=False,
                  list_imports=False,
                  translator_func=out_translate):
-        print modules
         self._link_manager = models.LinkManager(modules)
         print self._link_manager
-        modules = [mod.replace(os.sep, '.') for mod in modules]
         self.compiler = compiler
         self.js_path = os.path.abspath(output)
         self.top_module = modules[0]

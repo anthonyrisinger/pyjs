@@ -473,9 +473,6 @@ MODULE(s) will also translate, if available; they MUST be importable by the tool
     options, _args = parser.parse_args()
     args = []
     for a in _args:
-        if a.lower().endswith('.py'):
-            args.append(a[:-3])
-        else:
             args.append(a)
 
     if options.log_level is not None:

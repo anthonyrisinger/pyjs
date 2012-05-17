@@ -26,13 +26,19 @@ class LinkManager(object):
         self._p = p
         self._keys = set()
         self._cache = dict()
-        for p_lo in p_los:
+        for i, p_lo in enumerate(p_los):
             p_lo = path.relpath(path.abspath(p_lo), p)
             lo = LinkPrimitive(p_lo, p)
             qual = lo.qualname
             self._keys.add(qual)
             self._cache[qual] = lo
             self._cache.update(dict.fromkeys(lo.aliases, lo))
+            if i == 0:
+                self._cache['__main__'] = lo
+
+    @property
+    def main(self):
+        return self['__main__']
 
     def __getitem__(self, key):
         return self._cache[key]
