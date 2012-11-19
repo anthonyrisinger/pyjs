@@ -53,14 +53,11 @@ class DialogBox(PopupPanel):
         self.caption.setStyleName("Caption")
         self.caption.addMouseListener(self)
 
-        try:
-            self.generate_gwt15 = kwargs['gwt15']
-            # Make the DialogBox a 3x3 table, like GWT does, with
-            # empty elements with specific style names. These can be
-            # used with CSS to, for example, create border around the
-            # dialog box.
-        except:
-            self.generate_gwt15 = False
+        # Make the DialogBox a 3x3 table, like GWT does, with
+        # empty elements with specific style names. These can be
+        # used with CSS to, for example, create border around the
+        # dialog box.
+        self.generate_gwt15 = kwargs.pop('gwt15', False) and True
 
         if not self.generate_gwt15:
             cf.setHeight(1, 0, "100%")
@@ -96,7 +93,6 @@ class DialogBox(PopupPanel):
 
             self.panel.getWidget(0, 1).add(self.caption)
             self.panel.getWidget(1, 1).add(self.dialog_content)
-            del kwargs['gwt15']
 
         # Finalize
         kwargs['StyleName'] = kwargs.get('StyleName', "gwt-DialogBox")
