@@ -15,7 +15,6 @@ class StyleSheetCssFile:
         self._e.setAttribute('type', 'text/css')
         self._e.setAttribute('href', cssFile);
 
-        print "css file", cssFile
         if _doc is None:
             _doc = doc()
         _doc.getElementsByTagName("head").item(0).appendChild(self._e)

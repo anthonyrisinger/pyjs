@@ -139,6 +139,25 @@ class BrowserLinker(linker.BaseLinker):
                             self.merged_public.add(lib)
                             break
 
+        # merge all output/css.d/* files into one output/base.css file
+        css_d_path = os.path.join(self.output, 'css.d')
+        base_css_path = os.path.join(self.output, 'base.css')
+
+        if os.path.exists(css_d_path):
+            hdr = '/* name: %s\n * md5: %s\n */\n'
+            with open(base_css_path, 'w') as base_css:
+                for root, dirs, files in os.walk(css_d_path):
+                    docroot = root.replace(root, '', 1).strip('/')
+                    for frag in files:
+                        frag_path = os.path.join(root, frag)
+                        with open(frag_path) as fd:
+                            csstxt = fd.read()
+                            base_css.write(hdr % (
+                                os.path.relpath(frag_path, self.output),
+                                md5(csstxt).hexdigest(),
+                                ))
+                            base_css.write(csstxt)
+
     def find_boilerplate(self, name):
         if not self.top_module_path:
             raise RuntimeError('Top module not found %r' % self.top_module)

@@ -3,13 +3,13 @@
 
 
 TARGETS = [
-    'Anchor.py',
+    'cssauto.py',
 ]
 
 
 PACKAGE = {
-    'title': 'Linking',
-    'desc': 'Demonstration of external and internal links',
+    'title': 'cssauto',
+    'desc': 'CSS autoloading',
 }
 
 

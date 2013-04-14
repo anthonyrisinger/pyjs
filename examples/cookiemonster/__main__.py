@@ -3,13 +3,13 @@
 
 
 TARGETS = [
-    'Anchor.py',
+    'cookiemonster.py',
 ]
 
 
 PACKAGE = {
-    'title': 'Linking',
-    'desc': 'Demonstration of external and internal links',
+    'title': 'cookiemonster',
+    'desc': 'cookie get and set example',
 }
 
 
